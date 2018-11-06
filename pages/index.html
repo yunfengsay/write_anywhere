@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Collectes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/index.css">
+    
+    <script src="../js/lib/vue.js"></script>
+    <script src="../js/lib/vue-markdown.min.js"></script>
+    <script src="../js/lib/prism.min.js"></script>
+    <link rel="stylesheet" href="../css/prism.min.css">
+</head>
+<body>
+    <section id=container >
+ 
+        <textarea @focus="focus" @blur="blur" class="textarea" v-show="isOpen" name="" ></textarea>
+        <!-- <vue-markdown :source="content" focus="focus" @blur="blur" class="textarea" v-show="isOpen">this is the default slot</vue-markdown> -->
+        <div @click="toggleOpen" class="tabcontroller"></div>
+    </section>
+    <script src="../js/index.js"></script>
+</body>
+</html>
