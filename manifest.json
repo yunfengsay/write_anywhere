@@ -23,6 +23,15 @@
         "js": ["js/inject.js"],
         "matches": ["*://*/*"]
     }],
+    "commands": {
+        "toggle_open": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+Z",
+            "mac": "Command+Shift+Z"
+          },
+          "description": "Toggle feature foo"
+        }
+    },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "web_accessible_resources": ["pages/*", "js/*","css/*"]
 }

@@ -18,6 +18,7 @@ var app = new Vue({
                 });
             });
         },
+        
         focus: function () {
             let that = this;
             document.onkeydown = function (event) {
@@ -34,12 +35,30 @@ var app = new Vue({
             document.onkeydown = origin_document_onkey;
         },
         save: function() {
-            let href = location.href;
-            chrome.storage.local.set({
-                content: {k: href, v: this.content},
-            },() => {
-                console.log('保存成功')
-            })
-        }
+            let that = this;
+            chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+                let url = tabs[0].url;
+                let time_now = new Date().getTime();
+                localStorage.setItem(url + '|' + time_now, that.content)
+            });
+            // chrome.storage.local.set({
+            //     content: {k: href, v: this.content},
+            // },() => {
+            //     console.log('保存成功')
+            // })
+        },
+    },
+    mounted: function() {
+        let that = this;
+        chrome.commands.onCommand.addListener(function(command) {
+            switch(command) {
+                case 'toggle_open':
+                    that.toggleOpen();
+                    that.$refs.content_textarea.focus();
+                    break;
+                default:
+                    break;
+            }
+          });
     }
 })

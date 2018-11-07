@@ -31,7 +31,6 @@ body{
     background: #fff;
     border-radius: 3px;
     line-height: 1.1rem;
-    border: none;
     box-shadow: 5px 0px 5px 1px rgba(0, 0, 0, 0.1);
     padding: 13px 16px;
     -webkit-transition: height 2s ease;
@@ -39,6 +38,7 @@ body{
     -ms-transition: height 2s ease;
     -o-transition: height 2s ease;
     transition: height 2s ease;
+    border: 1px solid #eee;
 }
 
 .tabcontroller {
@@ -61,4 +61,12 @@ body{
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-bottom: 8px solid #fff;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: top .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    position: absolute;
+    top:  500px;
 }
