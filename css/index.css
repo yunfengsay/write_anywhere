@@ -23,6 +23,7 @@ body{
     position: relative;
     box-sizing:border-box;
     flex: 1;
+    resize:none;
     color: rgb(17, 10, 10);
     font-weight: 400;
     font-size: 15px;
@@ -33,11 +34,6 @@ body{
     line-height: 1.1rem;
     box-shadow: 5px 0px 5px 1px rgba(0, 0, 0, 0.1);
     padding: 13px 16px;
-    -webkit-transition: height 2s ease;
-    -moz-transition: height 2s ease;
-    -ms-transition: height 2s ease;
-    -o-transition: height 2s ease;
-    transition: height 2s ease;
     border: 1px solid #eee;
 }
 
@@ -50,7 +46,9 @@ body{
     bottom: 0px;
     background-color: #444;
 }
-.tabcontroller::before {
+
+
+.close::before {
     content: '';
     position: absolute;
     display: block;
@@ -62,7 +60,18 @@ body{
     border-right: 5px solid transparent;
     border-bottom: 8px solid #fff;
 }
-
+.open::before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    top: 10px;
+    left: 44%;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #fff;
+}
 .fade-enter-active, .fade-leave-active {
     transition: top .5s;
 }

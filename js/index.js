@@ -4,7 +4,7 @@ var app = new Vue({
     el: '#container',
     data: {
         isOpen: false,
-        content: 'this is content'
+        content: ''
     },
     methods: {
         toggleOpen: function () {

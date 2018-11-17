@@ -1,4 +1,22 @@
 #app{
     height:300px;
-    width: 140px;
+    width: 220px;
+}
+.popup_textarea{
+    position: relative;
+    box-sizing:border-box;
+    resize:none;
+    flex: 1;
+    color: rgb(17, 10, 10);
+    font-weight: 400;
+    font-size: 15px;
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+    width: 100%;
+    background: #fff;
+    height: 120px;
+    border-radius: 3px;
+    line-height: 1.1rem;
+    box-shadow: 5px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    padding: 13px 16px;
+    border: 1px solid #eee;
 }

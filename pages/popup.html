@@ -8,12 +8,18 @@
     <link rel="stylesheet" href="../css/popup.css">
 
     <script src="../js/lib/vue.js"></script>
-</head>
+</head>     
 <body>
     <section id="app">
+        <p class="user-detail">
+            <span class="user-name">
+                {{user.username}}
+            </span>
+        </p>
         <section>
-        
+            <textarea  placeholder="Input any thing here: command、script" @keyup.enter="parseCommand" v-model="content" class="popup_textarea"></textarea>
         </section>
+        <button @click="openDetailWindow">Open Detail</button>
     </section>
    
     <script src="../js/popup.js"></script>

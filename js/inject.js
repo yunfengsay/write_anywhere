@@ -21,10 +21,11 @@ function createIframe() {
     iframe.src += '?' + locationHref;
     iframe.id = IFRAME_ELEMENT_ID;
     iframe.style = `
+        display: none;
         position:fixed;
         bottom: 0;
         left:200px;
-        z-index:10000;
+        z-index:999999999;
         border:none;
         height: 30px;
         overflow:hidden;
@@ -39,6 +40,9 @@ chrome.extension.onMessage.addListener(
         // console.log(sender.tab ?
         //     "from a content script:" + sender.tab.url :
         //     "from the extension");
+        if(window.IFRAME&&window.IFRAME.style.display === 'none'){
+            window.IFRAME.style.display = 'block';
+        };
         if (request.isOpen){
             setIframeHeight();
         } else {

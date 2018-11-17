@@ -1,7 +1,7 @@
 {
-    "name": "Collection",
+    "name": "writeHere",
     "version": "1.0.0",
-    "description": "随手记录",
+    "description": "writeHere",
     "author": "yunfeng",
     "manifest_version": 2,
     "icons": {
@@ -26,10 +26,10 @@
     "commands": {
         "toggle_open": {
           "suggested_key": {
-            "default": "Ctrl+Shift+Z",
-            "mac": "Command+Shift+Z"
+            "default": "Ctrl+E",
+            "mac": "Command+E"
           },
-          "description": "Toggle feature foo"
+          "description": "Toggle"
         }
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
