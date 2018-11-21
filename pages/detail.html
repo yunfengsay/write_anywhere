@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,49 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/detail.css" />
     <script src="../js/lib/ace.js"></script>
 </head>
+
 <body>
-<div id="editor">
-</div>
-<script src="../js/detail.js"></script>
+    <div class="container">
+        <section class="tab-container">
+            <ul id="menu">
+                <li>
+                    <a href="#labs">实验室</a>
+                </li>
+                <li>
+                    <a href="#notes">笔记记录</a>
+                </li>
+                <li>
+                    <a href="#graphics">图形展示</a>
+                </li>
+            </ul>
+        </section>
+        <section class="tab-content" id="root">
+            <div id="labs" class="tab-panel" role="tabpanel">
+                <div id="editor"></div>
+            </div>
+            <div id="notes" class="tab-panel" role="tabpanel">
+                <table>
+                    <thead>
+                        <th>url</th>
+                        <th>title</th>
+                        <th>content</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in items">
+                            <td>{{ item.url }}</td>
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.content }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="graphics" class="tab-panel" role="tabpanel">
+                内容 3
+            </div>
+        </section>
+    </div>
+
+    <script src="../js/detail.js"></script>
 </body>
+
 </html>

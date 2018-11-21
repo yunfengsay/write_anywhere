@@ -1,6 +1,9 @@
+import db from '../js/lib/db.js';
+
 let origin_document_onkey = document.onkeydown;
+// let saveData = require('./lib/db').saveData;
 Vue.use(VueMarkdown);
-var app = new Vue({
+let app = new Vue({
     el: '#container',
     data: {
         isOpen: false,
@@ -39,7 +42,14 @@ var app = new Vue({
             chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
                 let url = tabs[0].url;
                 let time_now = new Date().getTime();
-                localStorage.setItem(url + '|' + time_now, that.content)
+                db.saveData({
+                    url,
+                    content: that.content,
+                    createAt: time_now,
+                    updateAt: time_now,
+                    isDelete: 0,
+                })
+                // localStorage.setItem(url + '|' + time_now, that.content)
             });
             // chrome.storage.local.set({
             //     content: {k: href, v: this.content},
@@ -50,6 +60,13 @@ var app = new Vue({
     },
     mounted: function() {
         let that = this;
+        chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+            let url = tabs[0].url;
+            let old_obj = localStorage.getItem(url);
+
+            old_obj? that.content = JSON.parse(old_obj).content: null;
+            
+        });
         chrome.commands.onCommand.addListener(function(command) {
             switch(command) {
                 case 'toggle_open':

@@ -14,12 +14,13 @@
 </head>
 <body>
     <section id=container >
-        <transition name="fade">
+        <!-- <transition name="fade"> -->
             <textarea placeholder="type here..." ref="content_textarea" autofocus v-model="content" @focus="focus" @blur="blur" class="textarea" v-show="isOpen" name="" ></textarea>
-        </transition>
+            <!-- <div @click="toggleOpen" class="tabcontroller" :class="isOpen?'open':'close'"></div> -->
+        <!-- </transition> -->
         <!-- <vue-markdown :source="content" focus="focus" @blur="blur" class="textarea" v-show="isOpen">this is the default slot</vue-markdown> -->
-        <div @click="toggleOpen" class="tabcontroller" :class="isOpen?'open':'close'"></div>
+    
     </section>
-    <script src="../js/index.js"></script>
+    <script type="module" src="../js/index.js"></script>
 </body>
 </html>
