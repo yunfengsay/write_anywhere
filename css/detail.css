@@ -7,6 +7,40 @@ html, body{
    height: 100vh;
    flex: 1;
 }
+#parser{
+    display: flex;
+}
+.pegEditor{
+    height: 100vh;
+    flex: 1;
+}
+.peg-test-container{
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+}
+.peg-test{
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #44444429;
+}
+.peg-result{
+    flex: 1;
+    border: 1px solid #44444429;
+    border-top: none;
+}
+.CodeMirror{
+    height: 100vh !important;
+    flex: 1;
+}
+.peg-result .error{
+    color: red;
+}
+.peg-result .success {
+    color: green;
+}
+
+
 
 .container{
     display: flex;
