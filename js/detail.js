@@ -1,4 +1,4 @@
-location.href = location.href
+
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
@@ -12,9 +12,15 @@ const pegEditor = CodeMirror.fromTextArea($('#pegEditor').get(0), {
     lineNumbers: true,
     mode: 'pegjs' // 设置mode 对应的也要这之前引入相应的js
 });
+const pegEditorTest = CodeMirror.fromTextArea($('#pegTest').get(0), {
+    lineNumbers: true,
+    mode: 'text' // 设置mode 对应的也要这之前引入相应的js
+});
 pegEditor.getDoc().setValue(localStorage.getItem('__peg'));
+pegEditorTest.getDoc().setValue(localStorage.getItem('__peg_test'));
 var code_container = ace.edit("editor");
-code_container.setValue(localStorage.getItem('__code') || '')
+code_container.setValue(localStorage.getItem('__code') || '');
+
 document.onkeydown = function (event) {
     if (event.metaKey) { // 83 cmd+s | 66 cmd+b
         switch (event.which) {
@@ -48,6 +54,7 @@ setInterval(() => {
 function saveAllHtmlCode() {
     localStorage.setItem('__code', code_container.getValue());
     localStorage.setItem('__peg', pegEditor.getValue());
+    localStorage.setItem('__peg_test',pegEditorTest.getValue());
 }
 
 function getGrammar() {
@@ -63,7 +70,6 @@ function pegBuild() {
             output: "source"
         });
         var timeAfter = (new Date).getTime();
-        console.log(parserSource)
         parser = eval(parserSource);
         let timeConsum = timeAfter - timeBefore;
         $("#build-message").attr("class", "message success").text('Build Success');
@@ -84,12 +90,19 @@ function buildErrorMessage(e) {
 function pegParseTarget() {
     try {
         var timeBefore = (new Date).getTime();
-        var output = parser.parse($("#pegTest").val());
+        var output = parser.parse(pegEditorTest.getValue());
         var timeAfter = (new Date).getTime();
         var timeConsum = timeAfter - timeBefore;
         $("#parse-message").attr("class", "message success").text(`[consume time ${timeConsum}]parse result --> \n ${output}`)
         var result = true;
       } catch (e) {
+          console.log(e)
+          let {location} = e;
+          let {start,end} = location;
+          pegEditorTest.getDoc().markText({line: start.line-1, ch: start.column-1}, {line: end.line-1, ch: end.column-1}, {
+              className: 'error-red'
+          });
+          pegEditorTest.getDoc().setCursor({line: start.line-1, ch: start.column-1});
         $("#parse-message").attr("class", "message error").text(buildErrorMessage(e));
 
         var result = false;
@@ -104,14 +117,17 @@ function scheduleBuildAndParse() {
         pegBuildAndParse()
     })
 }
-
+pegBuildAndParse()
 pegEditor.on("change", scheduleBuildAndParse);
-$("#pegTest").on('input', scheduleBuildAndParse)
+pegEditorTest.on("change", scheduleBuildAndParse);
 // ------------- dom ---------------
 
 let $menu = document.querySelector('#menu');
-let activeHash = location.hash;
-let $active = $(`a[href$='${activeHash}']`).get(0);
+let activeHash = location.hash || '#labs';
+let $$active = $(`a[href$='${activeHash}']`);
+window.$$active = $$active;
+$$active[0].click();
+let $active = $$active.get(0);
 $active.classList.toggle('active')
 $menu.addEventListener('click', (e) => {
     $active.classList.toggle('active');
