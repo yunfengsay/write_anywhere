@@ -20,6 +20,7 @@ let app = new Vue({
 
                 });
             });
+            return isOpen;
         },
         
         focus: function () {
@@ -60,6 +61,7 @@ let app = new Vue({
     },
     mounted: function() {
         let that = this;
+        let $textarea = document.querySelector("#textarea")
         chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
             let url = tabs[0].url;
             let old_obj = localStorage.getItem(url);
@@ -70,8 +72,11 @@ let app = new Vue({
         chrome.commands.onCommand.addListener(function(command) {
             switch(command) {
                 case 'toggle_open':
-                    that.toggleOpen();
-                    that.$refs.content_textarea.focus();
+                    if(that.toggleOpen()){
+                        setTimeout(() => {
+                            that.$refs.content_textarea.focus();
+                        })
+                    };
                     break;
                 default:
                     break;

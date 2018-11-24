@@ -17,11 +17,11 @@ html, body{
 .peg-test-container{
     display:flex;
     flex-direction: column;
-    flex: 1;
-}
-.peg-test{
     flex: 0.8;
     max-width: 50%;
+}
+.peg-test{
+    flex: 1;
     padding: 8px;
     border: 1px solid #44444429;
 }

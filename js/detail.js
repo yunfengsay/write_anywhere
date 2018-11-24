@@ -1,4 +1,5 @@
 
+import './lib/util.js';
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
@@ -26,6 +27,15 @@ document.onkeydown = function (event) {
         switch (event.which) {
             case 83:
                 saveAllHtmlCode();
+                // chrome.fileSystem.chooseEntry({type: 'saveFile'}, function(writableFileEntry) {
+                //     writableFileEntry.createWriter(function(writer) {
+                //       writer.onerror = errorHandler;
+                //       writer.onwriteend = function(e) {
+                //         console.log('write complete');
+                //       };
+                //       writer.write(new Blob(['1234567890'], {type: 'text/plain'}));
+                //     }, errorHandler);
+                // });
                 return false;
             case 66:
                 var code = code_container.getValue();
@@ -88,21 +98,22 @@ function buildErrorMessage(e) {
       : e.message;
 }
 function pegParseTarget() {
+    console.clear();
     try {
         var timeBefore = (new Date).getTime();
         var output = parser.parse(pegEditorTest.getValue());
         var timeAfter = (new Date).getTime();
+        pegEditorTest.refresh();
         var timeConsum = timeAfter - timeBefore;
-        $("#parse-message").attr("class", "message success").text(`[consume time ${timeConsum}]parse result --> \n ${output}`)
+        $("#parse-message").attr("class", "message success").text(`[consume time ${timeConsum} ms ]parse result --> \n ${output}`)
         var result = true;
       } catch (e) {
-          console.log(e)
           let {location} = e;
           let {start,end} = location;
           pegEditorTest.getDoc().markText({line: start.line-1, ch: start.column-1}, {line: end.line-1, ch: end.column-1}, {
               className: 'error-red'
           });
-          pegEditorTest.getDoc().setCursor({line: start.line-1, ch: start.column-1});
+        //   pegEditorTest.getDoc().setCursor({line: start.line-1, ch: start.column-1});
         $("#parse-message").attr("class", "message error").text(buildErrorMessage(e));
 
         var result = false;
