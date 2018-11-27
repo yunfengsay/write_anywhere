@@ -33,18 +33,18 @@
             <div id="labs" class="tab-panel" role="tabpanel">
                 <div id="editor"></div>
             </div>
-            <div id="notes" class="tab-panel" role="tabpanel">
+            <div id="notes" class="tab-panel notes" role="tabpanel">
                 <table>
                     <thead>
-                        <th>url</th>
                         <th>title</th>
                         <th>content</th>
+                        <th>createAt</th>
                     </thead>
                     <tbody>
-                        <tr class="testvfor" v-for="item in items">
-                            <td>{{ item.url }}</td>
-                            <td>{{ item.title }}</td>
-                            <td>{{ item.content }}</td>
+                        <tr class="testvfor" v-for="note in notes">
+                            <td> <a target="blank" :href="note.url">{{ note.title }}</a> </td>
+                            <td> {{ note.content }} </td>
+                            <td> {{ note.createAt }} </td>
                         </tr>
                     </tbody>
                 </table>
@@ -64,6 +64,7 @@
             </div>
         </section>
     </div>
+    <script src="../js/lib/vue.js"></script>
     <script src="../js/lib/jquery.min.js"></script>
     <script src="../js/lib/mode-javascript.js"></script>
     <script src="../js/lib/jsDump.js"></script>

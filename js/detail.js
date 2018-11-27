@@ -1,5 +1,6 @@
 
 import './lib/util.js';
+import './labs/notes.js';
 var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
@@ -97,8 +98,12 @@ function buildErrorMessage(e) {
       ? "Line " + e.location.start.line + ", column " + e.location.start.column + ": " + e.message
       : e.message;
 }
+function clearParseResultErrorMessaage() {
+    $('.peg-test-container .error-red').removeClass('error-red')
+}
 function pegParseTarget() {
     console.clear();
+    clearParseResultErrorMessaage()
     try {
         var timeBefore = (new Date).getTime();
         var output = parser.parse(pegEditorTest.getValue());
