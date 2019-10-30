@@ -40,7 +40,7 @@ document.onkeydown = function (event) {
                 return false;
             case 66:
                 var code = code_container.getValue();
-                console.clear();
+                // console.clear();
                 console.log('--------------  RUNNING  -----------------')
                 try {
                     eval(code);
@@ -101,8 +101,12 @@ function buildErrorMessage(e) {
 function clearParseResultErrorMessaage() {
     $('.peg-test-container .error-red').removeClass('error-red')
 }
+function getResult(output){
+    console.log('parse result -> ', output);
+    return output
+}
 function pegParseTarget() {
-    console.clear();
+    // console.clear();
     clearParseResultErrorMessaage()
     try {
         var timeBefore = (new Date).getTime();
@@ -110,7 +114,7 @@ function pegParseTarget() {
         var timeAfter = (new Date).getTime();
         pegEditorTest.refresh();
         var timeConsum = timeAfter - timeBefore;
-        $("#parse-message").attr("class", "message success").text(`[consume time ${timeConsum} ms ]parse result --> \n ${output}`)
+        $("#parse-message").attr("class", "message success").text(`[consume time ${timeConsum} ms ]parse result --> \n ${getResult(output)}`)
         var result = true;
       } catch (e) {
           let {location} = e;

@@ -40,14 +40,17 @@ chrome.extension.onMessage.addListener(
         // console.log(sender.tab ?
         //     "from a content script:" + sender.tab.url :
         //     "from the extension");
-        if(window.IFRAME&&window.IFRAME.style.display === 'none'){
+        if (window.IFRAME && window.IFRAME.style.display === 'none') {
             window.IFRAME.style.display = 'block';
         };
-        if (request.isOpen){
+        if (request.isOpen) {
             setIframeHeight();
         } else {
             setIframeHeight(0);
             sendResponse({}); // snub them.
         }
-    });
-createIframe()
+    }
+);
+
+
+// createIframe()
