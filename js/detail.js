@@ -18,8 +18,8 @@ const pegEditorTest = CodeMirror.fromTextArea($('#pegTest').get(0), {
     lineNumbers: true,
     mode: 'text' // 设置mode 对应的也要这之前引入相应的js
 });
-pegEditor.getDoc().setValue(localStorage.getItem('__peg'));
-pegEditorTest.getDoc().setValue(localStorage.getItem('__peg_test'));
+pegEditor.getDoc().setValue(localStorage.getItem('__peg')  || '');
+pegEditorTest.getDoc().setValue(localStorage.getItem('__peg_test') || '');
 var code_container = ace.edit("editor");
 code_container.setValue(localStorage.getItem('__code') || '');
 
