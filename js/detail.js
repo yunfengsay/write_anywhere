@@ -24,7 +24,8 @@ var code_container = ace.edit("editor");
 code_container.setValue(localStorage.getItem('__code') || '');
 
 document.onkeydown = function (event) {
-    if (event.metaKey) { // 83 cmd+s | 66 cmd+b
+	var ctrls = String.fromCharCode(event.which).toLowerCase() == 's' && event.ctrlKey
+    if (event.metaKey || ctrls) { // 83 cmd+s | 66 cmd+b
         switch (event.which) {
             case 83:
                 saveAllHtmlCode();
@@ -76,10 +77,10 @@ function pegBuild() {
 
     try {
         var timeBefore = (new Date).getTime();
-        var parserSource = peg.generate(getGrammar(), {
-            cache: true,
-            output: "source"
-        });
+        var parserSource = peg.generate(getGrammar(), Object.assign({
+			cache: true,
+            output: "source",
+        }, window.pegOptions || {}));
         var timeAfter = (new Date).getTime();
         parser = eval(parserSource);
         let timeConsum = timeAfter - timeBefore;
@@ -103,6 +104,10 @@ function clearParseResultErrorMessaage() {
 }
 function getResult(output){
     console.log('parse result -> ', output);
+	window.$$$$ = output
+	if(typeof output !== 'string') {
+		output = JSON.stringify(output)
+	}
     return output
 }
 function pegParseTarget() {
